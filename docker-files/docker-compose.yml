@@ -25,6 +25,6 @@ services:
     networks:
       - mitocode
       
-  networks:
+networks:
     mitocode:
       name: mitocode-network
