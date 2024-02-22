@@ -10,6 +10,8 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
+    networks:
+      - mitocode
 
   mongo-express:
     image: mongo-express
@@ -19,4 +21,9 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: root
-      ME_CONFIG_MONGODB_URL: mongodb://root:root@mongo-service:27017
+      ME_CONFIG_MONGODB_URL: mongodb://root:root@localhost:27017
+    networks:
+      - mitocode
+  networks:
+    mitocode:
+      name: mitocode-network
