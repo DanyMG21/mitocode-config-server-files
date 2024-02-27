@@ -4,4 +4,11 @@ server:
 spring:
   data:
     mongodb:
-      uri: mongodb://admin:pass@localhost:27017/mitocode?authSource=admin
+      host: localhost
+      port: 27017
+      database: admin
+      username: admin
+      password: pass
+      authentication-database: admin
+      #uri: mongodb://admin:pass@localhost:27017/mitocode?authSource=admin
+      
