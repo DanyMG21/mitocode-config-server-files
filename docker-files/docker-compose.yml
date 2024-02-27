@@ -1,32 +1,30 @@
 version: "3.9"
 
 services:
-  mongo:
-    image: mongo:latest
-    container_name: mongo
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: admin
+
+  mongo-service:
+    image: mongo
+    container_name: mitocode-mongo-service
     ports:
-      - "0.0.0.0:27017:27017"
+      - 27017:27017
+    environment: 
+      MONGO_INITDB_ROOT_USERNAME: mitocode
+      MONGO_INITDB_ROOT_PASSWORD: mitocode
     networks:
-      - MONGO
-   
+      - mitocode
+
   mongo-express:
-    image: mongo-express:latest
-    container_name: mongo-express
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
-      ME_CONFIG_MONGODB_ADMINPASSWORD: admin
-      ME_CONFIG_MONGODB_SERVER: mongo
-      ME_CONFIG_MONGODB_PORT: "27017"
+    image: mongo-express
+    container_name: mitocode-mongo-express
     ports:
-      - "0.0.0.0:8081:8081"
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: mitocode
+      ME_CONFIG_MONGODB_ADMINPASSWORD: mitocode
+      ME_CONFIG_MONGODB_URL: mongodb://mitocode:mitocode@mongo-service:27017
     networks:
-      - MONGO
-    depends_on:
-      - mongo
+      - mitocode
 
 networks:
-  MONGO:
-    name: MONGO
+  mitocode:
+    name: mitocode-network
