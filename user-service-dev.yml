@@ -1,5 +1,5 @@
 server:
-  port: ${CUSTOM.SERVER.PORT}
+  port: ${CUSTOM.SERVER.PORT:9010}
 
 spring:
   data:
