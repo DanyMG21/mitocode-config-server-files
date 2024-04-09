@@ -1,0 +1,29 @@
+server:
+  port: ${CUSTOM.SERVER.PORT:9005}
+
+#Circuitbreaker configuration
+resilience4j:
+  circuitbreaker:
+    configs:
+      userServiceCircuitBreaker:
+        slidingWindowSizw: 8
+        failureRateThreshold: 60
+        waitDurationInOpenState: 20s
+        permittedNumberOfCallsInHalfOpenState: 8
+        slowCallDurationThreshold: 1s
+        slowCallRateThreshold: 50
+
+#      productServiceCircuitBreaker:
+ #       slidingWindowSize: 8
+  #      failureRateThreshold: 60
+   #     waitDurationInOpenState: 20s
+    #    permittedNumberOfCallHalfOpenState: 4
+     #   slowCallDurationThreshold: 1s
+      #  slowCallRateThreshold: 50
+ 
+  instances:
+        user-service-cb:
+          base-config: userServiceCircuitBreaker
+       # product-service-cb:
+        #  base-config: productServiceCircuitBreaker
+        
