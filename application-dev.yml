@@ -10,3 +10,11 @@ eureka:
     registerWithEureka: true
     serviceUrl:
       defaultZone: ${EUREKA.SERVER.HOSTNAME:http://localhost:8761/eureka}
+
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+  pattern:
+    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
