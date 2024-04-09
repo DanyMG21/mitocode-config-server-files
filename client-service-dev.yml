@@ -6,8 +6,8 @@ resilience4j:
   circuitbreaker:
     configs:
       userServiceCircuitBreaker:
-        slidingWindowSizw: 8
-        failureRateThreshold: 60
+        slidingWindowSizw: 15
+        failureRateThreshold: 20
         waitDurationInOpenState: 20s
         permittedNumberOfCallsInHalfOpenState: 8
         slowCallDurationThreshold: 1s
