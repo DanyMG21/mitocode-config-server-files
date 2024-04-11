@@ -1,12 +1,13 @@
 server:
   port: ${CUSTOM.SERVER.PORT:9080}
 
-#Cloud Gateway Routes
+# Cloud Gateway Routes
 spring:
   cloud:
     gateway:
       routes:
+        
         - id: user-service-route
-          uri: lb://user-service #http://service1.com
+          uri: lb://user-service # http://service1.com, http://service2.com
           predicates:
             - Path=/api/user-service/**
