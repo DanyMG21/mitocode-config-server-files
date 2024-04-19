@@ -10,6 +10,6 @@ spring:
         - id: user-service-route
           uri: lb://user-service # http://service1.com, http://service2.com
           predicates:
-            - Path=/api/user-service/**
+            - Path=/api/user-service/mitocode/user
           filters:
             - StripPrefix=2
