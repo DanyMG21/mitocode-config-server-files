@@ -15,7 +15,7 @@ spring:
             - StripPrefix=2
             - AddRequestHeader=token, MyToken
             - AddRequestParameter=email, dany
-            # - AddResponseHeader=token, ${spring.cloud.gateway.routes[0].id:mitocode}
+            - AddResponseHeader=token, ${spring.cloud.gateway.routes[0].id:mitocode}
 
         #- id: product-service-route
          # uri: lb://product-service # http://service1.com, http://service2.com
