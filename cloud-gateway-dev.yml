@@ -1,6 +1,22 @@
 server:
   port: ${CUSTOM.SERVER.PORT:9080}
 
+# Circuit Breaker configuration
+resilience4j:
+  circuitbreaker:
+    configs:
+      mitocode-circuitbreaker: # cualquierId
+        slidingWindowSize: 15
+        failureRateThreshold: 20
+        waitDurationInOpenState: 20s
+        permittedNumberOfCallsInHalfOpenState: 8
+        slowCallDurationThreshold: 1s
+        slowCallRateThreshold: 50
+        
+    instances:
+      user-service-cb:
+        base-config: mitocode-circuitbreaker #cualquierId
+
 # Cloud Gateway Routes
 spring:
   cloud:
@@ -13,9 +29,9 @@ spring:
             - Path=/api/user-service/**
           filters:
             - StripPrefix=2
-           # - AddRequestHeader=token, MyToken
-           # - AddRequestParameter=email, dany
-           # - AddResponseHeader=token, ${spring.cloud.gateway.routes[0].id:mitocode}
+            # - AddRequestHeader=token, MyToken
+            # - AddRequestParameter=email, choy
+            # - AddResponseHeader=token, ${spring.cloud.gateway.routes[0].id:mitocode}
 
         - id: product-service-route
           uri: lb://product-service # http://service1.com, http://service2.com
@@ -23,7 +39,28 @@ spring:
             - Path=/api/product-service/**
           filters:
             - StripPrefix=2
-            - name: CustomFilter
-              args: 
-                headerKey: MitocodeKey
-                headerValue: MitocodeValue
+            - MitocodeFilter=MitocodeKey,MitocodeValue
+            - name: CircuitBreaker
+              args:
+                name: user-service-cb
+                statusCodes: 400,401,404,403,500,503,504
+                fallbackUri: forward:/api/user-service/mitocodes/user
+      # Primera implementación de Custom Filter sin cambio de nombre
+            # - name: CustomFilter
+            #   args:
+            #     headerKey: MitocodeKey
+            #     headerValue: MitocodeValue
+
+
+# Logging Configuration
+logging:
+  level:
+    reactor:
+      netty: DEBUG
+    org:
+      springframework:
+        cloud:
+          gateway: DEBUG
+        web: DEBUG
+  pattern:
+    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
