@@ -61,6 +61,6 @@ logging:
       springframework:
         cloud:
           gateway: DEBUG
-        web: DEBUG
+        web: ALL
   pattern:
     level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
