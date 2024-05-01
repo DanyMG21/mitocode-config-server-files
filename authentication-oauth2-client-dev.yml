@@ -1,0 +1,2 @@
+server:
+  port: ${CUSTOME.SERVER.PORT:9005}
