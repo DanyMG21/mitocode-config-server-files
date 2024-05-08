@@ -36,7 +36,7 @@ services:
       MYSQL_USER: admin
       MYSQL_PASSWORD: mitocode
     ports:
-      - 3306:3307
+      - 3307:3306
     networks:
       - mitocode    
 
@@ -50,7 +50,7 @@ services:
       KC_DB_USERNAME: admin
       KC_DB_PASSWORD: mitocode
       KC_DB_URL_HOST: mysql 
-      KC_DB_URL_PORT: 3307
+      KC_DB_URL_PORT: 3306
       KC_DB_SCHEMA: keycloak
     ports:
       - 8080:8080
