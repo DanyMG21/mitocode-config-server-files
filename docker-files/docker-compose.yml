@@ -24,8 +24,7 @@ services:
        ME_CONFIG_MONGODB_URL: mongodb://mitocode:mitocode@mongo-service:27017
      networks:
        - mitocode
-
-  mysql:
+   mysql:
     image: mysql:latest
     container_name: mitocode-mysql
     volumes:
@@ -40,7 +39,7 @@ services:
     networks:
       - mitocode    
 
-  keycloak:
+   keycloak:
     image: quay.io/keycloak/keycloak:19.0.1
     container_name: mitocode-keycloak
     environment:
@@ -60,15 +59,15 @@ services:
     networks:
       - mitocode      
 
-zipkin:
-   image: ghcr.io/openzipkin/zipkin-slim
-   container_name: mitocode-zipkin
-   environment:
-      -STORAGE_TYPE=mem
-   ports: 
-      - 9411:9411
-   networks:
-      - mitocode 
+   zipkin:
+    image: ghcr.io/openzipkin/zipkin-slim
+    container_name: mitocode-zipkin
+    environment:
+     -STORAGE_TYPE=mem
+    ports: 
+     - 9411:9411
+    networks:
+     - mitocode 
 volumes: 
   mysql-keycloak:
 
