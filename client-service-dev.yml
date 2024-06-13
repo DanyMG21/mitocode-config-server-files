@@ -26,4 +26,15 @@ resilience4j:
           base-config: userServiceCircuitBreaker
        # product-service-cb:
         #  base-config: productServiceCircuitBreaker
-        
+
+#Actuator configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+        base-path: /actuator
+  tracing:
+    sampling:
+      probability: 1.0
+
