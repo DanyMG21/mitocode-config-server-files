@@ -5,7 +5,13 @@ spring:
   data:
     mongodb:
       uri: mongodb://mitocode:mitocode@localhost:27017/mitocode?authSource=admin
-
+      # host: localhost
+      # port:27017
+      # database: mitocode
+      # username: mitocode 
+      # password: mitocode
+      # authentication-database: admin
+      
 #Actuator configuration
 management:
   endpoints:
@@ -16,3 +22,15 @@ management:
   tracing:
     sampling:
       probability: 1.0
+
+# Logging Configuration
+logging:
+  level:
+    org:
+      springframework:
+        web: INFO
+    com:
+      mitocode:
+        microservices: INFO
+  pattern:
+    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
